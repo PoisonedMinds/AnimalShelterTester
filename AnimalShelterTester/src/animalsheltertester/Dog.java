@@ -5,10 +5,7 @@
  */
 package animalsheltertester;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class Dog {
     //variables for characteristics
 
     private String dogName, dogBreed,name;
-    private int dogAge;
+    private int dogAge,dogWeight;
     List<String> names = new ArrayList(),breed = new ArrayList();
     //constructors
     public Dog() {
@@ -32,13 +29,16 @@ public class Dog {
         }
         dogBreed = breed.get((int)(Math.random()*500));
         dogAge = (int)(Math.random()*15+1);
+        dogWeight = (int)(Math.random()*50+10);
     }
 
     
     public String toString() {
+
         String output = "Name: " + dogName + "\n";
         output += "Breed: " + dogBreed + "\n";
         output += "Age: "+dogAge;
+        output += "\nWeight: "+dogWeight+"lbs";
         return output;
     }
     
@@ -48,8 +48,9 @@ public class Dog {
         ArrayList contents = new ArrayList();
         String line;
         try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(path));
+            FileInputStream fis = new FileInputStream(new File(path));
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
 
             while ((line = br.readLine()) != null) {
                 contents.add(num, line);
