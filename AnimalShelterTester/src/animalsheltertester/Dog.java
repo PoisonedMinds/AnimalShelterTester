@@ -9,7 +9,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @title AnimalShelterTester
+ * @author Steven Biro
+ * @teacher Mr. J. Carron
+ * @date 25-May-2015 1:40:44 PM
+ * @purpose The purpose of this program is to emulate how dog shelters function
+ */
 public class Dog {
 
     //variables for characteristics
@@ -17,10 +23,11 @@ public class Dog {
     private String dogName, dogBreed,name;
     private int dogAge,dogWeight;
     List<String> names = new ArrayList(),breed = new ArrayList();
-    //constructors
-    public Dog() {
+    //constructor
+    public Dog() {//get a list of dog names and breeds.
         names=read("names.txt");
         breed=read("dogs.txt");
+        //randomly choose names and breeds
         name=names.get((int)(Math.random()*50));
         if ((int)(Math.random()*2)==0) {
             dogName=name.substring(0,name.indexOf(" "));
@@ -28,13 +35,14 @@ public class Dog {
             dogName=name.substring(name.indexOf(" ")+1);
         }
         dogBreed = breed.get((int)(Math.random()*500));
+        //randomly set age and weight
         dogAge = (int)(Math.random()*15+1);
         dogWeight = (int)(Math.random()*50+10);
     }
 
     
     public String toString() {
-
+        //set the output for the individual dog. 
         String output = "Name: " + dogName + "\n";
         output += "Breed: " + dogBreed + "\n";
         output += "Age: "+dogAge;
@@ -43,11 +51,11 @@ public class Dog {
     }
     
     
-     public static ArrayList read(String path) {
+     public static ArrayList read(String path) {//method for reading files.
         int num = 0;
         ArrayList contents = new ArrayList();
         String line;
-        try {
+        try {//open file
             FileInputStream fis = new FileInputStream(new File(path));
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
@@ -56,7 +64,7 @@ public class Dog {
                 contents.add(num, line);
                 num++;
             }
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {//catch errors with finding the files
             System.out.println("File not found");
             System.exit(0);
 
